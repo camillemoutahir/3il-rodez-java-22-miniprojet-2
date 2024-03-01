@@ -1,11 +1,10 @@
-package fr.ecole3il.rodez2023.carte.elements;
+package fr.ecole3il.rodez2023.carte.chemin.elements;
 
 import java.util.List;
-import java.util.Iterator;
 
 /*Question : Quelle structure de données pourrait être utilisée pour stocker les relations entre les nœuds du graphe
 et les informations associées à ces relations, comme les coûts des arêtes ?
-Réponse : Collections
+Réponse : Collections et plus précisement : map, listes et set
 */
 
 /*Question : Pourquoi pensez-vous que les classes Noeud et Graphe ont été définies avec des paramètres génériques ?
