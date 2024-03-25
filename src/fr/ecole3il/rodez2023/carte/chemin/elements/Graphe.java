@@ -1,7 +1,8 @@
 package fr.ecole3il.rodez2023.carte.chemin.elements;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 /*Question : Quelle structure de données pourrait être utilisée pour stocker les relations entre les nœuds du graphe
 et les informations associées à ces relations, comme les coûts des arêtes ?
 Réponse : Collections et plus précisement : map, listes et set
@@ -13,14 +14,20 @@ Réponse : On utilise des paramètres génériques comme ça on peut changer leu
 
 public class Graphe <E> {
     private List<E> graphe;
+    private Map<Noeud<E>, List<Noeud<E>>> adjacence;
+
+    public Graphe(){
+        this.graphe = null;
+        this.adjacence = null;
+    }
 
     /**
-     * Ajoute un noeud au graphe si n'exite pas déjà dans le graphe
+     * Ajoute un noeud au graphe s'il n'exite pas déjà dans le graphe
      * @param noeud
      */
     public void ajouterNoeud(Noeud<E> noeud){
-        if (!graphe.contains(noeud)){
-            ajouterNoeud(noeud);
+        if (!adjacence.containsKey(noeud)){
+            adjacence.put(noeud, new ArrayList<>());
         }
     }
     /*Cette méthode ajoute une arête pondérée entre deux nœuds du graphe. Elle prend en paramètre le nœud de départ, le nœud d'arrivée et le coût de l'arête.
@@ -36,16 +43,15 @@ public class Graphe <E> {
      */
     public void ajouterArete(Noeud<E> depart, Noeud<E> arrivee, double cout){
         double arete =0;
-        if(!graphe.contains(depart)){
+        if(!adjacence.containsKey(depart)){
             ajouterNoeud(depart);
         }
-        if(!graphe.contains(arrivee)){
+        if(!adjacence.containsKey(arrivee)){
             ajouterNoeud(arrivee);
         }
+        adjacence.get(depart).add(arrivee);
+        //TODO ajouter cout arete
     }
-
-    /*Cette méthode renvoie le coût de l'arête entre deux nœuds spécifiés.*/
-    //TODO get cout arete
 
     /**
      * Renvoie coût de l'arête entre les 2 noeuds spécifiés
@@ -57,23 +63,20 @@ public class Graphe <E> {
         return 0.0;
     }
 
-    /*Cette méthode renvoie une liste contenant tous les nœuds du graphe.*/
-
     /**
-     *
-     * @return
+     * Renvoie liste contenant tous les noeuds du graphe
+     * @return liste contenant les noeuds du graphe
      */
     public List<Noeud<E>> getNoeuds(){
-        return null;
+        return new ArrayList<>(adjacence.keySet());
     }
-    /*Cette méthode renvoie une liste contenant tous les voisins d'un nœud spécifié. Si le nœud n'existe pas dans le graphe, elle renvoie une liste vide*/
-
+    
     /**
      * Renvoie liste contenant tous les voisins d'un noeud spécifié
      * @param noeud
-     * @return liste
+     * @return liste contenant tous les voisins du noeud
      */
     public List<Noeud<E>> getVoisins(Noeud<E> noeud){
-        return null;
+        return adjacence.getOrDefault(noeud, new ArrayList<>());
     }
 }
