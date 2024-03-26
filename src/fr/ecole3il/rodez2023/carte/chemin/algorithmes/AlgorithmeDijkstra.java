@@ -36,7 +36,7 @@ public class AlgorithmeDijkstra <E> implements AlgorithmeChemin<E>{
     while (!filePriorite.isEmpty()){
         //On cree un noeud de reference dans la file de priorite
         Noeud<E> noeudActuel = filePriorite.poll();
-        //Si le noeud supprime est le noeud d'arrivee, on arrete l'algo vu qu'on a déjà trouvé le noeud d'arrivee
+        //Si le noeud de ref est le noeud d'arrivee, on arrete l'algo vu qu'on a déjà trouvé le noeud d'arrivee
         if(noeudActuel.equals(arrivee)){
             break;
         }
