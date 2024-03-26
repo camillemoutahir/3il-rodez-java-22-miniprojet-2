@@ -3,28 +3,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Noeud <E>{
-    /* Attributs d'un nouvel objet Noeud avec la valeur spécifiée et initialise la liste de voisins*/
     private E valeur;
     private List<Noeud<E>> voisins ;
 
-    /*Constructeur qui crée un nouvel objet Noeud avec la valeur spécifiée et initialise la liste de voisins */
+    /**
+     * Crée un objet Noeud avec sa valeur spécifiée 
+     * et initialise la liste de voisins
+     * @param valeur
+     */
     private Noeud(E valeur) {
         this.valeur = valeur;
         this.voisins = new ArrayList<>();
     }
 
-    /* Méthode qui renvoie la valeur du nœud.*/
+    /**
+     * Renvoie la valeur du noeud
+     * @return valeur
+     */
     public E getValeur(){
         return valeur;
     }
-
-    /*Méthode qui renvoie la liste des noeuds voisins*/
-    public List<Noeud<E>> getVoisin() {
-        return voisins;
+    /**
+     * Renvoie la liste des noeuds voisins 
+     * @return liste voisins 
+     */
+    public List<Noeud<E>> getVoisins() {
+        return this.voisins;
     }
-
-    /*Méthode qui permet d'ajouter un noeud voisin à la liste des voisins du noeud actuel*/
+    /**
+     * Ajoute un noeud voisin à la liste des voisins
+     * @param voisin
+     */
     public void ajouterVoisin(Noeud<E> voisin){
-        voisins.add(voisin);
+        this.voisins.add(voisin);
     }
 }
