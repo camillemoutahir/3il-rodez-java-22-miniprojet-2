@@ -8,10 +8,10 @@ import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
 public interface AlgorithmeChemin<E> {
     /**
      * Trouve un chemin entre un noeud de départ et un noeud d'arrivée dans un graphe donné
-     * @param graphe
-     * @param depart
-     * @param arrivee
-     * @return liste des noeuds du chemin trouvé entre le noeud de départ et le noeud d'arrivée dans le graphe
+     * @param graphe graphe fourni
+     * @param depart noeud de depart
+     * @param arrivee noeud d'arrivee
+     * @return liste des noeuds du chemin trouvée entre le noeud de départ et le noeud d'arrivée
      */
     List<Noeud<E>> trouverChemin(Graphe<E> graphe, Noeud<E> depart, Noeud<E> arrivee);
 }
