@@ -5,6 +5,9 @@ import java.util.List;
 public class Noeud <E>{
     private E valeur;
     private List<Noeud<E>> voisins ;
+    //Coordonnees spatiales du noeud
+    private double x;
+    private double y;
 
     /**
      * Crée un objet Noeud avec sa valeur spécifiée 
@@ -14,6 +17,8 @@ public class Noeud <E>{
     private Noeud(E valeur) {
         this.valeur = valeur;
         this.voisins = new ArrayList<>();
+        this.x=x;
+        this.y=y;
     }
 
     /**
@@ -36,5 +41,14 @@ public class Noeud <E>{
      */
     public void ajouterVoisin(Noeud<E> voisin){
         this.voisins.add(voisin);
+    }
+    /* Accesseur de x*/
+    public double getX(){
+        return x;
+    }
+
+    /*Accesseur de y */
+    public double getY(){
+        return y;
     }
 }
