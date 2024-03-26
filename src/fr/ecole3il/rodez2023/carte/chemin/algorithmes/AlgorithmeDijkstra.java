@@ -1,5 +1,6 @@
 package fr.ecole3il.rodez2023.carte.chemin.algorithmes;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -31,9 +32,36 @@ public class AlgorithmeDijkstra <E> implements AlgorithmeChemin<E>{
         /*File de priorité qui classe les noeuds à explorer par leur cout actuel*/
         PriorityQueue<Noeud<E>> filePriorite = new PriorityQueue<>(Comparator.comparingDouble(listeCouts::get));
     /*Partie 2 : Exploration des noeuds*/
-    
-
+    //On n'arrete pas l'algo tant que la file de priorite n'est pas vide
+    while (!filePriorite.isEmpty()){
+        //On cree un noeud de reference dans la file de priorite
+        Noeud<E> noeudActuel = filePriorite.poll();
+        //Si le noeud supprime est le noeud d'arrivee, on arrete l'algo vu qu'on a déjà trouvé le noeud d'arrivee
+        if(noeudActuel.equals(arrivee)){
+            break;
+        }
+        //Sinon on calcule le cout de chaque voisin du noeud de reference
+        for (Noeud<E> voisin : graphe.getVoisins(noeudActuel)){
+            double coutTotal = listeCouts.get(noeudActuel) + graphe.getCoutArete(noeudActuel, voisin);
+            //Si le cout totale est inferieur au cout du noeud voisin
+            if (coutTotal<listeCouts.get(voisin)){
+                //Mise à jour du cout et predecesseur du voisin
+                listeCouts.put(voisin, coutTotal);
+                listePred.put(voisin, noeudActuel);
+                //Ajouter le voisin à la file de priorite
+                filePriorite.add(voisin);
+            }
+        }
+    }
     /*Partie 3 : Retourne du chemin le plus court trouvé*/
-    return null;
-}
+    //Creation du chemin (liste composee de plusieurs noeuds)
+    List<Noeud<E>> chemin = new ArrayList<>();
+    Noeud<E> noeudA = arrivee;
+    //On remonte les precesseurs du noeud d'arrivee jusqu'au noeud de depart
+    while (noeudA!= null){
+        chemin.addFirst(noeudA);
+        noeudA = listePred.get(noeudA);
+    }
+    return chemin;
+    }
 }
