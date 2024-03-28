@@ -136,6 +136,7 @@ public class CarteGUI extends JFrame {
 	}
 
 	private BufferedImage getTuileImage(Tuile tuile) {
+
 		BufferedImage image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		switch (tuile) {
