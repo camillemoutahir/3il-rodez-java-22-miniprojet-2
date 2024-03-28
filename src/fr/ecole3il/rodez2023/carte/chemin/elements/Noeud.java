@@ -14,7 +14,7 @@ public class Noeud <E>{
      * et initialise la liste de voisins
      * @param valeur
      */
-    private Noeud(E valeur) {
+    public Noeud(E valeur) {
         this.valeur = valeur;
         this.voisins = new ArrayList<>();
         this.x=x;

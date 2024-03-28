@@ -70,7 +70,7 @@ public class Graphe <E> {
      * @param y coordonnée y du noeud
      * @return le noeud avec ces coordonnées spatiales
      */
-    public Noeud<E> getNoeuds(int x, int y){
+    public Noeud<E> getNoeud(int x, int y){
         for(Noeud<E> noeud : listeNoeuds.keySet()){
             if(noeud.getX()==x && noeud.getY()==y){
                 return noeud;
@@ -86,6 +86,11 @@ public class Graphe <E> {
      */
     public List<Noeud<E>> getVoisins(Noeud<E> noeud){
         return noeud.getVoisins();
+    }
+
+    public Noeud<E>[] getNoeuds() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNoeuds'");
     }
 }
 
