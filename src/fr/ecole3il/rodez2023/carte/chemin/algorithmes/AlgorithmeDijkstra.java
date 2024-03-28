@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Collection;
 
 import fr.ecole3il.rodez2023.carte.chemin.elements.Graphe;
 import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
@@ -33,6 +34,7 @@ public class AlgorithmeDijkstra <E> implements AlgorithmeChemin<E>{
         PriorityQueue<Noeud<E>> filePriorite = new PriorityQueue<>(Comparator.comparingDouble(listeCouts::get));
     /*Partie 2 : Exploration des noeuds*/
     //On n'arrete pas l'algo tant que la file de priorite n'est pas vide
+    
     while (!filePriorite.isEmpty()){
         //On cree un noeud de reference dans la file de priorite
         Noeud<E> noeudActuel = filePriorite.poll();
@@ -57,7 +59,7 @@ public class AlgorithmeDijkstra <E> implements AlgorithmeChemin<E>{
     //Creation du chemin (liste composee de plusieurs noeuds)
     List<Noeud<E>> chemin = new ArrayList<>();
     Noeud<E> noeudA = arrivee;
-    //On remonte les precesseurs du noeud d'arrivee jusqu'au noeud de depart
+    //On remonte les predecesseurs du noeud d'arrivee jusqu'au noeud de depart
     while (noeudA!= null){
         chemin.addFirst(noeudA);
         noeudA = listePred.get(noeudA);
