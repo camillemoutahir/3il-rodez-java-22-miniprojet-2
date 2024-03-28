@@ -9,7 +9,6 @@ import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
 import fr.ecole3il.rodez2023.carte.elements.Carte;
 import fr.ecole3il.rodez2023.carte.elements.Case;
 import fr.ecole3il.rodez2023.carte.elements.Chemin;
-import java.util.ArrayList;
 
 public class AdaptateurAlgorithme {
     public static Chemin trouverChemin(AlgorithmeChemin<Case> algorithme, Carte carte, int xDepart, int yDepart, int xArrivee, int yArrivee) throws Exception{
@@ -25,12 +24,10 @@ public class AdaptateurAlgorithme {
         return new Chemin(CaseChemin);
     }
 
-    public static Graphe <Case> creerGraphe(Carte carte) throws Exception{
+    public static Graphe <Case> creerGraphe(Carte carte){
         Graphe<Case> graphe = new Graphe<>();
         int largeur = carte.getLargeur();
         int hauteur = carte.getHauteur();
-
-        
         for (int x = 0; x < largeur; x++) {
             for (int y = 0; y < hauteur; y++) {
                 Noeud<Case> noeudAct = new Noeud<>(carte.getCase(x, y));
@@ -40,7 +37,11 @@ public class AdaptateurAlgorithme {
         for(int x = 0; x < largeur; x++){
             for(int y = 0; y < hauteur; y++){
                 Noeud<Case> noeudAct = new Noeud<>(carte.getCase(x, y));
-                ajouterAretesVoisines(graphe, noeudAct, x, y, largeur, hauteur);
+                try {
+                    ajouterAretesVoisines(graphe, noeudAct, x, y, largeur, hauteur);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return graphe;
@@ -65,6 +66,9 @@ public class AdaptateurAlgorithme {
 
 
     public static double calculerCout(Case from, Case to){
+        if (from == null || to == null) {
+            throw new IllegalArgumentException("Les cases 'from' et 'to' doivent être non nulles");
+        }
         return from.getTuile().getPenalite() + to.getTuile().getPenalite();
     }
 

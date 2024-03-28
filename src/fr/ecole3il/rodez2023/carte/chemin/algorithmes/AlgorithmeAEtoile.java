@@ -1,6 +1,7 @@
 package fr.ecole3il.rodez2023.carte.chemin.algorithmes;
 import fr.ecole3il.rodez2023.carte.chemin.elements.Graphe;
 import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
+import fr.ecole3il.rodez2023.carte.elements.Case;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -76,8 +77,12 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
      * @return distance en double (réel)
      */
     private double heuristique(Noeud<E> noeud, Noeud<E> arrivee) {
-        double deltaX = Math.abs(noeud.getX() - arrivee.getX());
-        double deltaY = Math.abs(noeud.getY() - arrivee.getY());
-        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        if(noeud.getValeur() instanceof Case && arrivee.getValeur() instanceof Case){
+            Case case1 = (Case) noeud.getValeur();
+            Case case2 = (Case) arrivee.getValeur();
+            return Math.sqrt(Math.pow(case1.getX() - case2.getX(), 2) + Math.pow(case1.getY() - case2.getY(), 2));
+
+        }
+        return 0;
     }
 }

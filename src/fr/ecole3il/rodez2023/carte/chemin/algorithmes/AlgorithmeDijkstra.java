@@ -1,12 +1,12 @@
 package fr.ecole3il.rodez2023.carte.chemin.algorithmes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Collection;
 
 import fr.ecole3il.rodez2023.carte.chemin.elements.Graphe;
 import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
@@ -62,8 +62,11 @@ public class AlgorithmeDijkstra <E> implements AlgorithmeChemin<E>{
     //On remonte les predecesseurs du noeud d'arrivee jusqu'au noeud de depart
     while (noeudA!= null){
         chemin.addFirst(noeudA);
+        // On recupere le predecesseur du noeud actuel
         noeudA = listePred.get(noeudA);
     }
+    // On inverse la liste pour avoir le chemin dans le bon sens
+        Collections.reverse(chemin);
     return chemin;
     }
 }

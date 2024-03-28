@@ -9,6 +9,8 @@ et les informations associées à ces relations, comme les coûts des arêtes ?
 Réponse : Collections et plus précisement : map, listes et set
 */
 
+import fr.ecole3il.rodez2023.carte.elements.Case;
+
 /*Question : Pourquoi pensez-vous que les classes Noeud et Graphe ont été définies avec des paramètres génériques ?
 Réponse : On utilise des paramètres génériques comme ça on peut changer leur type pour avoir n'importe quel type de paramètres (int, String, etc...)
  */
@@ -28,8 +30,8 @@ public class Graphe <E> {
      * @param noeud
      */
     public void ajouterNoeud(Noeud<E> noeud){
-        if (!listeNoeuds.containsKey(noeud)){
-            listeNoeuds.put(noeud, new HashMap<>());
+        if (!this.listeNoeuds.containsKey(noeud)){
+            this.listeNoeuds.put(noeud, new HashMap<>());
         }
     }
 
@@ -42,13 +44,13 @@ public class Graphe <E> {
     public void ajouterArete(Noeud<E> depart, Noeud<E> arrivee, double cout){
         /*On vérifie si les noeuds de départ et d'arrivee 
         existent sinon les creer*/
-        if(!listeNoeuds.containsKey(depart)){
+        if(!this.listeNoeuds.containsKey(depart)){
             ajouterNoeud(depart);
         }
-        if(!listeNoeuds.containsKey(arrivee)){
+        if(!this.listeNoeuds.containsKey(arrivee)){
             ajouterNoeud(arrivee);
         }
-        listeNoeuds.get(depart).put(arrivee,cout);
+        this.listeNoeuds.get(depart).put(arrivee,cout);
     }
 
     /**
@@ -58,25 +60,18 @@ public class Graphe <E> {
      * @return coût de l'arête entre les 2 (si un des noeuds n'existent pas renvoie 0)
      */
     public double getCoutArete(Noeud<E> depart, Noeud<E> arrivee){
-        if (listeNoeuds.containsKey(depart)&& listeNoeuds.containsKey(arrivee)){
+        if (this.listeNoeuds.containsKey(depart)&& this.listeNoeuds.containsKey(arrivee)){
             return this.listeNoeuds.get(depart).get(arrivee);
         }
         return 0;
     }
 
     /**
-     * Renvoie le noeud avec les coordonnées x et y
-     * @param x coordonnée x du noeud
-     * @param y coordonnée y du noeud
-     * @return le noeud avec ces coordonnées spatiales
+     * Renvoie liste contenant tous les noeuds du graphe
+     * @return liste contenant les noeuds du graphe
      */
-    public Noeud<E> getNoeud(int x, int y){
-        for(Noeud<E> noeud : listeNoeuds.keySet()){
-            if(noeud.getX()==x && noeud.getY()==y){
-                return noeud;
-            }
-        }
-        return null;
+    public List<Noeud<E>> getNoeuds(){
+        return new ArrayList<>(this.listeNoeuds.keySet());
     }
     
     /**
@@ -87,10 +82,24 @@ public class Graphe <E> {
     public List<Noeud<E>> getVoisins(Noeud<E> noeud){
         return noeud.getVoisins();
     }
-
-    public Noeud<E>[] getNoeuds() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNoeuds'");
+    
+    /**
+     * Récupère le nœud correspondant aux coordonnées spatiales spécifiées.
+     * @param x coordonnée x du nœud
+     * @param y coordonnée y du nœud
+     * @return le nœud correspondant à ces coordonnées spatiales
+     */
+    public Noeud<E> getNoeud(int nx, int ny) {
+        for (Noeud<E> noeud : listeNoeuds.keySet()) {
+            Case c = (Case) noeud.getValeur();
+            if (c.getX() == nx && c.getY() == ny) {
+                return noeud;
+            }
+        }
+        return null;
     }
 }
+
+
+
 
