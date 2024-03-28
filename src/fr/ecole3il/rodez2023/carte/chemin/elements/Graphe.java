@@ -65,11 +65,18 @@ public class Graphe <E> {
     }
 
     /**
-     * Renvoie liste contenant tous les noeuds du graphe
-     * @return liste contenant les noeuds du graphe
+     * Renvoie le noeud avec les coordonnées x et y
+     * @param x coordonnée x du noeud
+     * @param y coordonnée y du noeud
+     * @return le noeud avec ces coordonnées spatiales
      */
-    public List<Noeud<E>> getNoeuds(){
-        return new ArrayList<>(listeNoeuds.keySet());
+    public Noeud<E> getNoeuds(int x, int y){
+        for(Noeud<E> noeud : listeNoeuds.keySet()){
+            if(noeud.getX()==x && noeud.getY()==y){
+                return noeud;
+            }
+        }
+        return null;
     }
     
     /**
