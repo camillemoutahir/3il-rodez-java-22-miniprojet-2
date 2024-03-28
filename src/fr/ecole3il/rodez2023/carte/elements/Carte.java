@@ -1,5 +1,8 @@
 package fr.ecole3il.rodez2023.carte.elements;
 
+import fr.ecole3il.rodez2023.carte.chemin.elements.Graphe;
+import fr.ecole3il.rodez2023.carte.chemin.elements.Noeud;
+
 /**
  * La classe Carte représente une carte composée de tuiles disposées en une grille bidimensionnelle.
  * 
@@ -40,5 +43,8 @@ public class Carte {
      */
     public int getHauteur() {
         return tuiles[0].length;
+    }
+    public Case getCase(int x, int y){
+        return new Case(getTuile(x, y), x, y);
     }
 }
